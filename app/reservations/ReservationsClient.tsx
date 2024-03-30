@@ -8,7 +8,7 @@ import { SafeReservation, SafeUser } from "../types";
 import Heading from "../components/Heading";
 import Container from "../components/Container";
 import ListingCard from "../components/listings/ListingCard";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 interface ReservationsClientProps {
   reservations: SafeReservation[];
@@ -20,6 +20,7 @@ const ReservationsPage: React.FC<ReservationsClientProps> = ({
   currentUser,
 }) => {
   const router = useRouter();
+  const [deletingId, setDeletingId] = useState();
   const loginModal = useLoginModal();
 
   const onCancel = useCallback(
@@ -60,7 +61,7 @@ const ReservationsPage: React.FC<ReservationsClientProps> = ({
             reservation={reservation}
             actionId={reservation.id}
             onAction={onCancel}
-            disabled={reservation.status === "CANCELLED"}
+            disabled={deletingId === reservation.id}
             actionLabel="Cancel reservation"
             currentUser={currentUser}
           />
