@@ -144,7 +144,7 @@ const SearchModal = () => {
           subtitle="Make sure everyone is free!"
         />
         <Calendar
-          onChange={(value) => setDateRange(value.selection)}
+          onChange={(value) => setDateRange(value as Range)}
           value={dateRange}
         />
       </div>
